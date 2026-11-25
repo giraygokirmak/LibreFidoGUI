@@ -17,6 +17,10 @@ jobs:
         board: [ esp32s3 ]
         include:
           - profile: standard
+            board: esp32s3-4mb
+            defaults: sdkconfig.defaults;sdkconfig.4mb
+            platform: esp32s3-4mb
+          - profile: standard
             board: atoms3u
             defaults: sdkconfig.defaults;sdkconfig.4mb;sdkconfig.atoms3u
             platform: esp32s3-4mb

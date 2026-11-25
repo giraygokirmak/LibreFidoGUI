@@ -109,8 +109,8 @@ A new board (the whole image at 0x0; hold BOOT while plugging in):
 
 ```bash
 esptool --chip esp32s3 -p COM6 write-flash 0x0 librefido-2.2.5-esp32s3-standard-full.bin
-# 4 MB module:
-esptool --chip esp32s3 -p COM6 write-flash 0x0 librefido-2.2.2-esp32s3-4mb-standard-full.bin
+# 4 MB module, including Waveshare ESP32-S3-Zero (GPIO0):
+esptool --chip esp32s3 -p COM6 write-flash --flash-size 4MB 0x0 librefido-2.2.5-esp32s3-4mb-standard-full.bin
 # AtomS3U (8 MB hardware, existing 4 MB layout, GPIO41):
 esptool --chip esp32s3 -p COM6 write-flash --flash-size 4MB 0x0 librefido-2.2.5-atoms3u-4mb-standard-full.bin
 ```

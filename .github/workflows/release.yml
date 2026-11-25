@@ -64,7 +64,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        board: [esp32s3, atoms3u-4mb]
+        board: [esp32s3, esp32s3-4mb, atoms3u-4mb]
         profile: [standard, hardened]
     runs-on: ubuntu-latest
     container: espressif/idf:v5.5.1
@@ -81,6 +81,9 @@ jobs:
         run: |
           . "$IDF_PATH/export.sh"
           DEFAULTS=sdkconfig.defaults
+          if [ "$BOARD" = "esp32s3-4mb" ]; then
+            DEFAULTS="sdkconfig.defaults;sdkconfig.4mb"
+          fi
           if [ "$BOARD" = "atoms3u-4mb" ]; then
             DEFAULTS="sdkconfig.defaults;sdkconfig.4mb;sdkconfig.atoms3u"
           fi
@@ -131,7 +134,7 @@ jobs:
           import hashlib, os, pathlib
           root = pathlib.Path("dist")
           version = os.environ["VERSION"]
-          expected = {f"librefido-{version}-{board}-{profile}-{suffix}" for board in ("esp32s3", "atoms3u-4mb") for profile in ("standard", "hardened") for suffix in ("app.bin", "full.bin", "parts.zip")}
+          expected = {f"librefido-{version}-{board}-{profile}-{suffix}" for board in ("esp32s3", "esp32s3-4mb", "atoms3u-4mb") for profile in ("standard", "hardened") for suffix in ("app.bin", "full.bin", "parts.zip")}
           expected.add(f"librefido_tools-{version}-py3-none-any.whl")
           actual = {p.name for p in root.iterdir()}
           assert actual == expected, (actual, expected)

@@ -17,6 +17,7 @@ from librefido.firmware import parse
 
 BOARDS = {
     "esp32s3": ("esp32s3", 16, 0),
+    "esp32s3-4mb": ("esp32s3-4mb", 4, 0),
     "atoms3u-4mb": ("esp32s3-4mb", 4, 41),
 }
 
